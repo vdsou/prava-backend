@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const md5 = require("crypto-js/md5");
 const jwt = require("jsonwebtoken");
-const User = require("../model/user");
+const User = require("../model/User");
 const secretKey = process.env.TOKEN_SECRET_KEY;
 
 exports.signup = async (req, res) => {
