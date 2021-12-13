@@ -2,7 +2,6 @@ const express = require("express");
 const courseModuleRouter = express.Router();
 const courseModuleController = require("../controllers/courseModule");
 
-
 courseModuleRouter.get("/get/:id", courseModuleController.getCourseModule);
 courseModuleRouter.get("/get", courseModuleController.getCourseModules);
 courseModuleRouter.post("/insert", courseModuleController.insertCourseModule);

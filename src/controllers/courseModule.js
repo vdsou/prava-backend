@@ -37,7 +37,7 @@ exports.insertCourseModule = async (req, res) => {
     name,
   });
   try {
-    newCourseModule.save();
+    await newCourseModule.save();
     return res
       .status(201)
       .json({ message: "Módulo criado com sucesso!", success: true });
