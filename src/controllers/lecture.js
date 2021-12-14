@@ -17,7 +17,7 @@ exports.getLecture = async (req, res) => {
 
 exports.getLectures = async (req, res) => {
   try {
-    const lecture = await Lecture.find();
+    const lecture = await Lecture.find().populate("courseModule", "_id name");
     return res.status(200).json({ lecture, success: true });
   } catch (error) {
     console.log(error);
@@ -29,19 +29,19 @@ exports.getLectures = async (req, res) => {
 
 exports.insertLecture = async (req, res) => {
   const { name, date, url, courseModuleId } = req.body;
-  const courseModuleExists = await CourseModule.findById(courseModuleId);
-  if (!courseModuleExists) {
-    return res
-      .status(404)
-      .json({ message: "Módulo não encontrado", success: false });
-  }
-  const lecture = await Lecture.find({ name });
-  if (lecture.length >= 1) {
-    return res
-      .status(409)
-      .json({ message: "Nome de aula já existe!", success: false });
-  }
   try {
+    const courseModuleExists = await CourseModule.findById(courseModuleId);
+    if (!courseModuleExists) {
+      return res
+        .status(404)
+        .json({ message: "Módulo não encontrado", success: false });
+    }
+    const lecture = await Lecture.find({ name });
+    if (lecture.length >= 1) {
+      return res
+        .status(409)
+        .json({ message: "Nome de aula já existe!", success: false });
+    }
     const newLecture = new Lecture({
       _id: mongoose.Types.ObjectId(),
       name,
