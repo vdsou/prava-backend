@@ -28,7 +28,7 @@ exports.getLectures = async (req, res) => {
 };
 
 exports.insertLecture = async (req, res) => {
-  const { name, date, url, courseModuleId } = req.body;
+  const { name, date, url, courseModuleId, description } = req.body;
   try {
     const courseModuleExists = await CourseModule.findById(courseModuleId);
     if (!courseModuleExists) {
@@ -45,6 +45,7 @@ exports.insertLecture = async (req, res) => {
     const newLecture = new Lecture({
       _id: mongoose.Types.ObjectId(),
       name,
+      description,
       courseModule: courseModuleId,
       date,
       url,

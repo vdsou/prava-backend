@@ -8,6 +8,10 @@ const lectureSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   courseModule: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CourseModule",
