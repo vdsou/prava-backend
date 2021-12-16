@@ -10,7 +10,6 @@ const updateLecturesQuantity = async (courseModuleId) => {
     { _id: courseModuleId },
     { lecturesQuantity: getLecturesByCourseModulesId.length }
   );
-  console.log(getLecturesByCourseModulesId);
 };
 
 exports.getLecture = async (req, res) => {
