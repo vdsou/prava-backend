@@ -2,6 +2,17 @@ const mongoose = require("mongoose");
 const Lecture = require("../model/Lecture");
 const CourseModule = require("../model/CourseModule");
 
+const updateLecturesQuantity = async (courseModuleId) => {
+  const getLecturesByCourseModulesId = await Lecture.find({
+    courseModule: courseModuleId,
+  });
+  await CourseModule.findOneAndUpdate(
+    { _id: courseModuleId },
+    { lecturesQuantity: getLecturesByCourseModulesId.length }
+  );
+  console.log(getLecturesByCourseModulesId);
+};
+
 exports.getLecture = async (req, res) => {
   const { id } = req.params;
   try {
@@ -51,6 +62,11 @@ exports.insertLecture = async (req, res) => {
       url,
     });
     await newLecture.save();
+    try {
+      updateLecturesQuantity(courseModuleId);
+    } catch (error) {
+      console.log(error);
+    }
     return res
       .status(201)
       .json({ message: "Aula criada com sucesso!", success: true });
@@ -93,7 +109,13 @@ exports.deleteLecture = async (req, res) => {
   try {
     const lectureExists = await Lecture.findById({ _id: id });
     if (lectureExists) {
+      const courseModuleId = lectureExists.courseModule._id.toString();
       await lectureExists.remove();
+      try {
+        updateLecturesQuantity(courseModuleId);
+      } catch (error) {
+        console.log(error);
+      }
       return res.status(200).json({
         message: "Aula excluída com sucesso",
         success: true,

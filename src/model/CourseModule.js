@@ -7,6 +7,8 @@ const courseModuleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  lecturesQuantity: { type: Number, default: 0 },
+  createdAt: { type: Date, default: new Date() },
 });
 
 module.exports = mongoose.model("CourseModule", courseModuleSchema);

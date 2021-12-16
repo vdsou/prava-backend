@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const CourseModule = require("../model/CourseModule");
+const Lecture = require("../model/Lecture");
 
 exports.getCourseModule = async (req, res) => {
   const { id } = req.params;
@@ -48,6 +49,7 @@ exports.insertCourseModule = async (req, res) => {
       .json({ message: "Algo deu errado!", success: false });
   }
 };
+
 exports.deleteCourseModule = async (req, res) => {
   const { id } = req.params;
   try {
