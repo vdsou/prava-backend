@@ -1,6 +1,6 @@
 ### Projeto backend - parte do teste prático FullStatck JS da Verzel
 
-Feito em Node.js com Express na versão 16.6.0
+Feito em Node.js com Express na versão 16.6.0 e com o banco de dados MongoDB
 - ``yarn`` para instalar as dependências
 - ``yarn start`` para rodar
 - ``yarn dev`` para rodar em modo de desenvolvimento.
